@@ -1,13 +1,16 @@
 package com.deva.testproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.deva.testproject.model.AuditResult;
 import com.deva.testproject.model.CalcOpDto;
 import com.deva.testproject.model.CalcResult;
+import com.deva.testproject.service.AuditService;
 import com.deva.testproject.service.CalcService;
 
 @RestController
@@ -16,6 +19,9 @@ public class CalcController {
 	
 	@Autowired
 	private CalcService calcService;
+	
+	@Autowired
+	private AuditService auditService;
 	
 	
 	/**
@@ -62,5 +68,14 @@ public class CalcController {
 	public CalcResult securedDiff(@RequestBody CalcOpDto calcOpDto) {
 		Integer result = calcService.sub(calcOpDto);
 		return new CalcResult(result.toString());
+	}
+	
+	/**
+     * To get all Audit (transactions) records
+     * @return AuditResult
+     */
+	@GetMapping("/transactions")
+	public AuditResult getTransaction() {
+		return auditService.getAuditResult();
 	}
 }

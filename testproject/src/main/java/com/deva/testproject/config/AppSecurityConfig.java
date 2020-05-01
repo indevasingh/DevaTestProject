@@ -14,6 +14,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
+		
+		// To access h2-console from browser.
+		http.headers().frameOptions().sameOrigin();
+		
         http.authorizeRequests()
         	.antMatchers("/api/secured/**").hasRole("USER")
         	.antMatchers("/", "/api/**").permitAll()
