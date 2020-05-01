@@ -14,3 +14,10 @@ APIs which needs basic authentication.
 Please use below user creditials to consume above APIs (same configured as in memory authentication):
 Username: user
 Password: password
+
+
+Update: May 1, 2020
+Added audit functionality. Used Spring Data JPA and H2 datebase (in-memory database) to implement this.
+To get all the transactions details, added below REST endpoint.
+
+POST http://{{service-ip}}/api/transactions
